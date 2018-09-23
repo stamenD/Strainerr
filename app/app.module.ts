@@ -6,9 +6,16 @@ import { AppComponent } from "./app.component";
 import { ItemService } from "./item/item.service";
 import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
-
+import {  NativeScriptUIChartModule} from "nativescript-ui-chart/angular";
+import {  NativeScriptUICalendarModule} from "nativescript-ui-calendar/angular";
+import {  NativeScriptUISideDrawerModule} from "nativescript-ui-sidedrawer/angular";
 // Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { ActionBarComponent } from "./actionBar/actionBar.component";
+import { CalendarComponent } from "./calendar/calendar.component";
+import { StatisticComponent } from "./statistic/statistic.component";
+import { FileComponent } from "./fileSystem/file.component";
+import { OptionsComponent } from "./options/options.component";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -19,12 +26,21 @@ import { ItemDetailComponent } from "./item/item-detail.component";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NativeScriptUIChartModule,
+        NativeScriptUICalendarModule,
+        NativeScriptFormsModule,
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         AppComponent,
         ItemsComponent,
-        ItemDetailComponent
+        ItemDetailComponent,
+        ActionBarComponent,
+        CalendarComponent,
+        StatisticComponent,
+        FileComponent,
+        OptionsComponent
     ],
     providers: [
         ItemService

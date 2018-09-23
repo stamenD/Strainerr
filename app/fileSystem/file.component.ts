@@ -3,6 +3,7 @@ import * as fs from "tns-core-modules/file-system";
 const fileSystemModule = require("tns-core-modules/file-system");
 @Component({
     selector: "fileComponent",
+    moduleId: module.id,
     templateUrl: "file.component.html",
     // styleUrls: ['./file.component.css']
 })

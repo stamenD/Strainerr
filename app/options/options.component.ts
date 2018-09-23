@@ -5,6 +5,7 @@ import * as dialogs from "ui/dialogs";
 @Component({
     selector: "optionsComponent",
     templateUrl: "options.component.html",
+    moduleId: module.id
     // styleUrls: ['./options.component.css']
 })
 
