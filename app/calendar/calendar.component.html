@@ -1,0 +1,40 @@
+<actionBar></actionBar>
+
+<GridLayout rows="*, *" columns="*,*" tkExampleTitle tkToggleNavButton>
+	<StackLayout row="0" colSpan="2">
+		<RadCalendar
+		(loaded)="calendarLoaded($event)"
+		[eventSource]="calendarEvents" eventsViewMode="Inline" selectionMode="Single" viewMode="Month" locale="bg-BG"
+		[monthViewStyle]="monthViewStyle" 
+		[yearViewStyle]="yearViewStyle" 
+		[dayViewStyle]="dayViewStyle"
+		[inlineEventCellStyle]="inlineEvent" 
+
+		 (dateSelected)="onDateSelected($event)"
+		 (dateDeselected)="onDateDeselected($event)" (navigatedToDate)="onNavigatedToDate($event)" (navigatingToDateStarted)="onNavigatingToDateStarted($event)"
+		 (viewModeChanged)="onViewModeChanged($event)"></RadCalendar>
+	</StackLayout>
+
+	<StackLayout row="1" colSpan="2">
+		<GridLayout rows="auto, *" columns="*,*" tkExampleTitle tkToggleNavButton>
+			<StackLayout row="0" col="0 ">
+				<Label text="Вид" textWrap="true"> </Label>
+				<!-- <DropDown #dd backroundColor="red"  [items]="items" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
+		 (opened)="onopen()" (closed)="onclose()" ></DropDown> -->
+				<ng-container *ngFor="let exercise of exercises;let i = index">
+					<Button [text]="exercise" (tap)="onTap(i)" [className]="selectedExercise == i ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+				</ng-container>
+			</StackLayout>
+			<StackLayout row="0" col="1 ">
+				<Label text="Бонус" textWrap="true"> </Label>
+				<Button [text]='"+" + indexVersion + " Протеин"' (tap)="setBonus()" [className]="indexVersion !== 0 ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+			</StackLayout>
+			<StackLayout row="1" colSpan="2">
+				<Button text="задай!" [isEnabled]="selectedExercise!==-1 || indexVersion!==0" (tap)="setExercise()" class='btn btn-primary btn-rounded-lg  btn-active'></Button>
+			</StackLayout>
+		</GridLayout>
+	</StackLayout>
+
+
+
+</GridLayout>
