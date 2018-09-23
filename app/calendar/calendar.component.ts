@@ -3,10 +3,10 @@ import * as calendarModule from "nativescript-ui-calendar";
 import { CalendarTransitionMode } from "nativescript-ui-calendar";
 import { Color } from "color";
 import { CalendarStylesService } from '../services/calendar-service'
-import { ExercisesService } from "~/services/exercises-service";
+import { ExercisesService } from "../services/exercises-service";
 // import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { InlineEventCellStyle, CalendarEvent, CalendarEventsViewMode, RadCalendar, CalendarMonthViewStyle } from "nativescript-ui-calendar"
-import { StorageService } from "~/services/storage-service";
+import { StorageService } from "../services/storage-service";
 import { clear } from "tns-core-modules/application-settings/application-settings";
 
 

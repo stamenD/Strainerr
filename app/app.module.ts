@@ -16,6 +16,9 @@ import { CalendarComponent } from "./calendar/calendar.component";
 import { StatisticComponent } from "./statistic/statistic.component";
 import { FileComponent } from "./fileSystem/file.component";
 import { OptionsComponent } from "./options/options.component";
+import { CalendarStylesService } from "./services/calendar-service";
+import { ExercisesService } from "./services/exercises-service";
+import { StorageService } from "./services/storage-service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -43,7 +46,9 @@ import { OptionsComponent } from "./options/options.component";
         OptionsComponent
     ],
     providers: [
-        ItemService
+        CalendarStylesService,
+        ExercisesService,
+        StorageService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

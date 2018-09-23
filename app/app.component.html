@@ -1,2 +1,25 @@
 <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
-<page-router-outlet></page-router-outlet>
+
+<!-- <ActionItem ios.systemIcon="4" android.systemIcon="ic_menu_more" ios.position="left" (tap)="openDrawer()" > </ActionItem> -->
+<!-- <ActionBar title="RadSideDrawer Demo" class="action-bar">
+        <StackLayout orientation="horizontal" ios:horizontalAlignment="center" android:horizontalAlignment="left">
+            <Label text="Strainer" class="action-label"></Label>
+        </StackLayout>
+        <NavigationButton android.systemIcon="ic_menu_more" (tap)="openDrawer()"></NavigationButton>
+    </ActionBar> -->
+    <RadSideDrawer #sidedrawerId tkExampleTitle tkToggleNavButton drawerTransition="ScaleUpTransition" >
+        <StackLayout tkDrawerContent class="sideStackLayout">
+            <StackLayout class="sideTitleStackLayout">
+                <Label text="МЕНЮ"></Label>
+            </StackLayout>
+            <StackLayout class="sideStackLayout">
+                <Label [nsRouterLink]="['home']"  [ngClass]="{'sideLightGrayLabel': id === 1 }" (tap)="onCloseDrawerTap(1)" text="Календар" class="sideLabel"></Label>
+                <Label [nsRouterLink]="['items']" [ngClass]="{'sideLightGrayLabel': id === 2 }" (tap)="onCloseDrawerTap(2)" text="Статистика" class="sideLabel"></Label>
+                <Label [nsRouterLink]="['file']" [ngClass]="{'sideLightGrayLabel': id === 3 }" (tap)="onCloseDrawerTap(3)" text="Еxport/Import" class="sideLabel"></Label>
+                <Label [nsRouterLink]="['options']"[ngClass]="{'sideLightGrayLabel': id === 4 }" (tap)="onCloseDrawerTap(4)" text="Настройки" class="sideLabel"></Label>
+                <Label text="Информация" class="sideLabel"></Label>
+            </StackLayout>
+        </StackLayout>
+        <page-router-outlet tkMainContent></page-router-outlet>
+    </RadSideDrawer>
+    

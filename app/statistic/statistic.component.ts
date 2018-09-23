@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { LinearAxis } from "nativescript-ui-chart";
-import { StorageService } from '~/services/storage-service';
+import { StorageService } from '../services/storage-service';
 
 
 @Component({
