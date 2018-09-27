@@ -1,5 +1,6 @@
-import { Component,OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import * as fs from "tns-core-modules/file-system";
+import { StorageService } from "~/services/storage-service";
 const fileSystemModule = require("tns-core-modules/file-system");
 @Component({
     selector: "fileComponent",
@@ -8,50 +9,27 @@ const fileSystemModule = require("tns-core-modules/file-system");
     // styleUrls: ['./file.component.css']
 })
 
-export class FileComponent implements  OnInit {
+export class FileComponent implements OnInit {
 
-    constructor() { }
+    constructor(private storage: StorageService) { }
 
-
+    public allInfo;
     ngOnInit() {
-        // const documents = fileSystemModule.knownFolders.documents();
-        // const folder = documents.getFolder(vm.get("folderName") || "testFolder");
-        // const file = folder.getFile(`${(vm.get("fileName") || "testFile")}`.txt);
-        
-        // file.writeText(vm.get("fileTextContent") || "some random content")
-        //     .then((result) => {
-        //         file.readText()
-        //             .then((res) => {
-        //                 vm.set("successMessage", `Successfully saved in${file.path}`);
-        //                 vm.set("writtenContent", res);
-        //                 vm.set("isItemVisible", true);
-        //             });
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     });
+        this.allInfo = this.storage.getAllWorkouts();
+        // var documents = fs.knownFolders.documents();
+        // console.log(">> ", documents)
+        // var path = fs.path.join(documents.path, "pages.txt");
+        // var file = fs.File.fromPath(path);
+        // file.writeText("123123").then((result) => {
+        //     file.readText().then((r) => {
+        //         console.log(r)
 
-        var documents = fs.knownFolders.documents();
-        var path = fs.path.join(documents.path, "pages.txt");
-        var file = fs.File.fromPath(path);
-        file.writeText("123123").then((result)=>{
-            file.readText().then((r)=>{
-            console.log(r)
-
-            })
-            console.log(1111)
-        
-        }).catch((err)=>{console.log(err)})
-    
-        // return new Promise<Object>((resolve, reject) => {
-        //     file.readText().then((content: string) => {
-        //         let data = <Array<Object>>JSON.parse(content);
-        //         resolve(data);
         //     })
-        //         .catch((err) => {
-        //             reject(err);
-        //         });
-        // });
+        //     console.log(1111)
+
+        // }).catch((err) => { console.log(err) })
+
     }
 
-    
+
 }

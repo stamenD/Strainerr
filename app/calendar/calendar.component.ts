@@ -29,7 +29,7 @@ export class CalendarComponent implements OnInit {
     public indexVersion = 0;
     public _mode = CalendarTransitionMode.Combo
     public selectedDate
-    public selectedExercise
+    public selectedExercise = -1
 
     constructor(
         private _calendarService: CalendarStylesService,
@@ -62,24 +62,24 @@ export class CalendarComponent implements OnInit {
     }
 
     onDateSelected(args) {
-        console.log("onDateSelected: " + args.date);
+        // console.log("onDateSelected: " + args.date);
         this.selectedDate = args.date;
     }
 
     onDateDeselected(args) {
-        console.log("onDateDeselected: " + args.date);
+        // console.log("onDateDeselected: " + args.date);
     }
 
     onNavigatedToDate(args) {
-        console.log("onNavigatedToDate: " + args.date);
+        // console.log("onNavigatedToDate: " + args.date);
     }
 
     onNavigatingToDateStarted(args) {
-        console.log("onNavigatingToDateStarted: " + args.date);
+        // console.log("onNavigatingToDateStarted: " + args.date);
     }
 
     onViewModeChanged(args) {
-        console.log("onViewModeChanged: " + args.newValue);
+        // console.log("onViewModeChanged: " + args.newValue);
     }
     onTap(args) {
         if (this.selectedExercise == +args)
@@ -95,15 +95,18 @@ export class CalendarComponent implements OnInit {
         this._storageService.setWorkout(this.selectedExercise, this.indexVersion, this.selectedDate)
         this.loadEvents()
     }
-    loadEvents(){
+    loadEvents() {
         let events = this._storageService.getAllWorkouts();
-        console.log("---------------------------------")
-        console.log(events)
+        // console.log("---------------------------------")
+        // console.log(events)
 
         this.calendarEvents = [];
         for (let i = 0; i < events.length; i++) {
-
-            let title = this.exercises[events[i]["exercise"]] + " " + this.bonusses[events[i]["bonus"]];
+            let title
+            if (events[i]["exercise"] == -1)
+                title = this.bonusses[events[i]["bonus"]];
+            else
+                title = this.exercises[events[i]["exercise"]] + " " + this.bonusses[events[i]["bonus"]];
             let date = new Date(events[i]["date"]);
             let event = new calendarModule.CalendarEvent(title, date, date, true);
 

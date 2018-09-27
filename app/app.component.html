@@ -15,7 +15,7 @@
             <StackLayout class="sideStackLayout">
                 <Label [nsRouterLink]="['home']"  [ngClass]="{'sideLightGrayLabel': id === 1 }" (tap)="onCloseDrawerTap(1)" text="Календар" class="sideLabel"></Label>
                 <Label [nsRouterLink]="['items']" [ngClass]="{'sideLightGrayLabel': id === 2 }" (tap)="onCloseDrawerTap(2)" text="Статистика" class="sideLabel"></Label>
-                <Label [nsRouterLink]="['file']" [ngClass]="{'sideLightGrayLabel': id === 3 }" (tap)="onCloseDrawerTap(3)" text="Еxport/Import" class="sideLabel"></Label>
+                <Label [nsRouterLink]="['file']" [ngClass]="{'sideLightGrayLabel': id === 3 }" (tap)="onCloseDrawerTap(3)" text="Backup" class="sideLabel"></Label>
                 <Label [nsRouterLink]="['options']"[ngClass]="{'sideLightGrayLabel': id === 4 }" (tap)="onCloseDrawerTap(4)" text="Настройки" class="sideLabel"></Label>
                 <Label text="Информация" class="sideLabel"></Label>
             </StackLayout>

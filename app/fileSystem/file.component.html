@@ -1,2 +1,8 @@
 <actionBar></actionBar>
-<Label text="Файлове система" textWrap="true"> </Label>
+<ScrollView sdkExampleTitle sdkToggleNavButton>
+    <StackLayout>
+        <ng-container *ngFor="let info of allInfo;let i = index">
+            <Label text="{{info | json }}" textWrap="true"> </Label>
+        </ng-container>
+    </StackLayout>
+</ScrollView>

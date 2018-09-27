@@ -1,9 +1,40 @@
 <actionBar></actionBar>
+<StackLayout>
 
-<RadCartesianChart tkExampleTitle tkToggleNavButton>
-    <DateTimeContinuousAxis allowPan="true" allowZoom="true" tkCartesianHorizontalAxis minimum="01/09/2018" maximum="30/11/2018"
-        majorStep="week" dateFormat="MMM-dd" labelFitMode="Rotate" labelRotationAngle="1.2"></DateTimeContinuousAxis>
-    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+    <StackLayout orientation="horizontal">
+        <Button text="Тази седмица" (tap)="selectStatistic(0)" [className]="selectTab == 0 ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+        <Button text="Графика" (tap)="selectStatistic(2)" [className]="selectTab == 2 ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+        <Button text="Рекорди" (tap)="selectStatistic(1)" [className]="selectTab == 1 ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+    </StackLayout>
 
-    <BarSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="date" valueProperty="exercise"></BarSeries>
-</RadCartesianChart>
+    <StackLayout *ngIf="selectTab==0">
+        <ng-container *ngFor="let ex of exercises;let i = index">
+            <Label [text]='ex + ":  " + timesPerThisWeek["exercise"][i]' textWrap="true"> </Label>
+        </ng-container>
+        <Label [text]='"Протеин:  " + timesPerThisWeek["bonus"]' textWrap="true"> </Label>
+    </StackLayout>
+
+    <StackLayout *ngIf="selectTab==1">
+        <ng-container *ngFor="let ex of exercises;let i = index">
+            <Label [text]='ex' textWrap="true"> </Label>
+            <Label [text]='"Брой: "+ mostTimesPerWeek["exercise"][i]["count"]' textWrap="true"> </Label>
+            <Label [text]='"Седмица: "+ mostTimesPerWeek["exercise"][i]["date"]' textWrap="true"> </Label>
+            <Label text="" textWrap="true"> </Label>
+        </ng-container>
+    </StackLayout>
+
+    <StackLayout *ngIf="selectTab==2" orientation="horizontal">
+        <ng-container *ngFor="let exercise of exercises;let i = index">
+            <Button [text]="exercise" (tap)="onTap(i)" [className]="selectedExercise == i ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
+        </ng-container>
+    </StackLayout>
+    <StackLayout *ngIf="selectTab==2" orientation="horizontal">
+        <RadCartesianChart *ngIf="selectTab==2 && selectedExercise!=-1" tkExampleTitle tkToggleNavButton>
+            <DateTimeContinuousAxis allowPan="true" allowZoom="true" tkCartesianHorizontalAxis [minimum]="minWeek"
+                [maximum]="maxWeek" majorStep="week" dateFormat="MMM-dd" labelFitMode="Rotate" labelRotationAngle="1.2"></DateTimeContinuousAxis>
+            <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+
+            <BarSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="date" [valueProperty]="selectedExercise+1"></BarSeries>
+        </RadCartesianChart>
+    </StackLayout>
+</StackLayout>
