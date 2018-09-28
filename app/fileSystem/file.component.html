@@ -1,8 +1,7 @@
 <actionBar></actionBar>
 <ScrollView sdkExampleTitle sdkToggleNavButton>
     <StackLayout>
-        <ng-container *ngFor="let info of allInfo;let i = index">
-            <Label text="{{info | json }}" textWrap="true"> </Label>
-        </ng-container>
+            <TextField text="{{allInfo}}" > </TextField>
+
     </StackLayout>
 </ScrollView>

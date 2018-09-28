@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { DropDownService } from "~/services/dropdown-service";
 
 @Component({
     selector: "ns-app",
@@ -9,9 +10,9 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    public id = 1;
+    public id = 2;
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) { }
+    constructor(private _changeDetectionRef: ChangeDetectorRef, private dropDownService: DropDownService) { }
 
     @ViewChild("sidedrawerId") public drawerComponent: RadSideDrawerComponent;
     private drawer: RadSideDrawer;
@@ -23,7 +24,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
- 
+        this.dropDownService.change.subscribe(value => {
+            console.log('Received new subject value: ')
+            this.openDrawer()
+        })
     }
 
     public openDrawer() {

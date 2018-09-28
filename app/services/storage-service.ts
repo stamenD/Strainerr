@@ -23,7 +23,15 @@ export class StorageService {
         }
         return calendarEvents;
     }
-
+    getAllWorkoutsString(): string{
+        let calendarEvents = "";
+        let exsNumber = getNumber("numberExs", 0)
+        for (let i = 0; i < exsNumber ; i++) {
+            calendarEvents +=" "
+            calendarEvents += getString(i.toString());
+        }
+        return calendarEvents;
+    }
     deleteAllWorkouts(){
         clear();
     }

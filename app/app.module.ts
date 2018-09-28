@@ -19,6 +19,7 @@ import { OptionsComponent } from "./options/options.component";
 import { CalendarStylesService } from "./services/calendar-service";
 import { ExercisesService } from "./services/exercises-service";
 import { StorageService } from "./services/storage-service";
+import { DropDownService } from "~/services/dropdown-service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -48,7 +49,8 @@ import { StorageService } from "./services/storage-service";
     providers: [
         CalendarStylesService,
         ExercisesService,
-        StorageService
+        StorageService,
+        DropDownService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

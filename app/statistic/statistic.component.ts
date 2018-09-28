@@ -4,8 +4,8 @@ import { LinearAxis } from "nativescript-ui-chart";
 import { StorageService } from '../services/storage-service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ExercisesService } from '~/services/exercises-service';
-
-
+import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
+import { alert } from "tns-core-modules/ui/dialogs";
 @Component({
     selector: "statistic",
     moduleId: module.id,
@@ -15,7 +15,9 @@ import { ExercisesService } from '~/services/exercises-service';
 export class StatisticComponent implements OnInit {
     public categoricalSource = [];
     public timesPerWeek = {};
+    public allWorkouts = [];
     public mostTimesPerWeek = {};
+    public sourcePie = [];
     public timesPerThisWeek = {};
     public minWeek = new Date();
     public selectTab = 0;
@@ -25,11 +27,22 @@ export class StatisticComponent implements OnInit {
     public maxWeek = new Date();;
     private _linearAxisZoomPan: LinearAxis;
     private _linearAxisZoom: LinearAxis;
-    public selectedExercise = 0
+    public selectedExercise = -1
 
+
+    public tabSelectedIndex: number;
+    public tabSelectedIndexResult: string;
+    public tabSelectedIndexInner: number;
 
     constructor(private storageService: StorageService, private exercisesService: ExercisesService) {
+        this.tabSelectedIndex = 0;
+        this.tabSelectedIndexInner = 0;
+        // this.tabSelectedIndexResult = "Profile Tab (tabSelectedIndex = 0 )";
+    }
 
+    onSelectedIndexChangedInner(args: SelectedIndexChangedEventData) {
+        const newIndex = args.newIndex;
+        this.selectedExercise = newIndex
     }
 
     ngOnInit() {
@@ -39,6 +52,12 @@ export class StatisticComponent implements OnInit {
         this.timesPerThisWeek["exercise"] = {}
         this.mostTimesPerWeek["exercise"] = {}
         for (let i = 0; i < this.exercises.length; i++) {
+            this.sourcePie[i] = {}
+            this.allWorkouts[i] = {}
+            this.allWorkouts[i]["name"] = this.exercises[i]
+            this.allWorkouts[i]["amount"] = 0
+            this.sourcePie[i]["name"] = this.exercises[i]
+            this.sourcePie[i]["amount"] = 0
             this.timesPerThisWeek["exercise"][i] = 0;
             this.mostTimesPerWeek["exercise"][i] = {};
             this.mostTimesPerWeek["exercise"][i]["count"] = 0;
@@ -52,6 +71,7 @@ export class StatisticComponent implements OnInit {
             let d = (1 + (n - 1) * 7); // 1st of January + 7 days for each week
             let y = new Date(new Date(this.workouts[i]["date"]).getFullYear(), 0, d).toDateString();
             if (this.workouts[i]["exercise"] != -1) {
+                this.allWorkouts[this.workouts[i]["exercise"]]["amount"]++;
                 if (this.timesPerWeek[y]) {
                     if (this.timesPerWeek[y][this.workouts[i]["exercise"]])
                         this.timesPerWeek[y][this.workouts[i]["exercise"]] += 1
@@ -70,9 +90,14 @@ export class StatisticComponent implements OnInit {
                 this.timesPerThisWeek["bonus"] += this.workouts[i]["bonus"]
             }
         }
+
+        for (let i = 0; i < this.exercises.length; i++) {
+            console.log(". ", this.timesPerThisWeek["exercise"][i.toString()])
+            this.sourcePie[i]["amount"] = this.timesPerThisWeek["exercise"][i.toString()]
+        }
         let j = 0
         this.categoricalSource = []
-        // console.log(">>. ", this.timesPerWeek)
+        console.log(">>. ", this.sourcePie)
         for (var prop in this.timesPerWeek) {
             this.categoricalSource[j] = {}
             this.categoricalSource[j]["date"] = new Date(prop);
@@ -81,7 +106,7 @@ export class StatisticComponent implements OnInit {
             if (this.maxWeek < new Date(prop))
                 this.maxWeek = new Date(prop)
             for (let i = 0; i < this.exercises.length; i++) {
-                this.categoricalSource[j][i+1] = this.timesPerWeek[prop][i];
+                this.categoricalSource[j][i + 1] = this.timesPerWeek[prop][i];
                 if (this.timesPerWeek[prop][i] >= this.mostTimesPerWeek["exercise"][i]["count"]) {
                     this.mostTimesPerWeek["exercise"][i]["count"] = this.timesPerWeek[prop][i]
                     this.mostTimesPerWeek["exercise"][i]["date"] = prop
@@ -90,6 +115,10 @@ export class StatisticComponent implements OnInit {
             j++;
         }
         console.log(">>. ", this.categoricalSource)
+        this.categoricalSource.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
+        console.log(">>. ", this.categoricalSource)
+
+
 
         this._linearAxisZoom = new LinearAxis();
         this._linearAxisZoom.horizontalLocation = "Left";

@@ -8,7 +8,7 @@ import { FileComponent } from "./fileSystem/file.component";
 import { OptionsComponent } from "./options/options.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/items", pathMatch: "full" },
     { path: "items", component: StatisticComponent },
     { path: "home", component: CalendarComponent },
     { path: "file", component: FileComponent },

@@ -15,7 +15,7 @@ export class FileComponent implements OnInit {
 
     public allInfo;
     ngOnInit() {
-        this.allInfo = this.storage.getAllWorkouts();
+        this.allInfo = this.storage.getAllWorkoutsString();
         // var documents = fs.knownFolders.documents();
         // console.log(">> ", documents)
         // var path = fs.path.join(documents.path, "pages.txt");
