@@ -10,8 +10,11 @@
 		[dayViewStyle]="dayViewStyle"
 		[inlineEventCellStyle]="inlineEvent" 
 
+		(inlineEventSelected)="onEvent($event)"
 		 (dateSelected)="onDateSelected($event)"
-		 (dateDeselected)="onDateDeselected($event)" (navigatedToDate)="onNavigatedToDate($event)" (navigatingToDateStarted)="onNavigatingToDateStarted($event)"
+		 (dateDeselected)="onDateDeselected($event)" 
+		 (navigatedToDate)="onNavigatedToDate($event)" 
+		 (navigatingToDateStarted)="onNavigatingToDateStarted($event)"
 		 (viewModeChanged)="onViewModeChanged($event)"></RadCalendar>
 	</StackLayout>
 
@@ -30,7 +33,7 @@
 				<Button [text]='"+" + indexVersion + " Протеин"' (tap)="setBonus()" [className]="indexVersion !== 0 ? 'btn btn-primary btn-rounded-lg  btn-active' : ''"></Button>
 			</StackLayout>
 			<StackLayout row="1" colSpan="2">
-				<Button text="задай!" [isEnabled]="selectedExercise!==-1 || indexVersion!==0" (tap)="setExercise()" class='btn btn-primary btn-rounded-lg  btn-active'></Button>
+				<Button text="задай!" [isEnabled]="(selectedExercise!==-1 || indexVersion!==0) && selectedDate!=0" (tap)="setExercise()" class='btn btn-primary btn-rounded-lg  btn-active'></Button>
 			</StackLayout>
 		</GridLayout>
 	</StackLayout>

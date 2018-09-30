@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { LinearAxis } from "nativescript-ui-chart";
 import { StorageService } from '../services/storage-service';
-import { forEach } from '@angular/router/src/utils/collection';
 import { ExercisesService } from '~/services/exercises-service';
 import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
-import { alert } from "tns-core-modules/ui/dialogs";
 @Component({
     selector: "statistic",
     moduleId: module.id,
@@ -20,7 +17,6 @@ export class StatisticComponent implements OnInit {
     public sourcePie = [];
     public timesPerThisWeek = {};
     public minWeek = new Date();
-    public selectTab = 0;
     public exercises
     public workouts
     public thisWeek
@@ -28,16 +24,12 @@ export class StatisticComponent implements OnInit {
     private _linearAxisZoomPan: LinearAxis;
     private _linearAxisZoom: LinearAxis;
     public selectedExercise = -1
-
-
     public tabSelectedIndex: number;
-    public tabSelectedIndexResult: string;
     public tabSelectedIndexInner: number;
 
     constructor(private storageService: StorageService, private exercisesService: ExercisesService) {
         this.tabSelectedIndex = 0;
         this.tabSelectedIndexInner = 0;
-        // this.tabSelectedIndexResult = "Profile Tab (tabSelectedIndex = 0 )";
     }
 
     onSelectedIndexChangedInner(args: SelectedIndexChangedEventData) {
@@ -46,9 +38,10 @@ export class StatisticComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.exercises = this.exercisesService.getExercises();
         this.workouts = this.storageService.getAllWorkouts();
-        this.thisWeek = this.getWeekNumber(new Date())
+        this.thisWeek = this.getWeekNumber(new Date(),true)
         this.timesPerThisWeek["exercise"] = {}
         this.mostTimesPerWeek["exercise"] = {}
         for (let i = 0; i < this.exercises.length; i++) {
@@ -67,7 +60,7 @@ export class StatisticComponent implements OnInit {
         this.mostTimesPerWeek["bonus"] = 0
         for (let i = 0; i < this.workouts.length; i++) {
 
-            let n = this.getWeekNumber(new Date(this.workouts[i]["date"]))
+            let n = this.getWeekNumber(new Date(this.workouts[i]["date"]),false)
             let d = (1 + (n - 1) * 7); // 1st of January + 7 days for each week
             let y = new Date(new Date(this.workouts[i]["date"]).getFullYear(), 0, d).toDateString();
             if (this.workouts[i]["exercise"] != -1) {
@@ -92,12 +85,12 @@ export class StatisticComponent implements OnInit {
         }
 
         for (let i = 0; i < this.exercises.length; i++) {
-            console.log(". ", this.timesPerThisWeek["exercise"][i.toString()])
+            // console.log(". ", this.timesPerThisWeek["exercise"][i.toString()])
             this.sourcePie[i]["amount"] = this.timesPerThisWeek["exercise"][i.toString()]
         }
         let j = 0
         this.categoricalSource = []
-        console.log(">>. ", this.sourcePie)
+        console.log(">>. ", this.timesPerWeek)
         for (var prop in this.timesPerWeek) {
             this.categoricalSource[j] = {}
             this.categoricalSource[j]["date"] = new Date(prop);
@@ -114,9 +107,7 @@ export class StatisticComponent implements OnInit {
             }
             j++;
         }
-        console.log(">>. ", this.categoricalSource)
         this.categoricalSource.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
-        console.log(">>. ", this.categoricalSource)
 
 
 
@@ -137,14 +128,12 @@ export class StatisticComponent implements OnInit {
             this.selectedExercise = +args
     }
 
-    getWeekNumber(d) {
+    getWeekNumber(d, special) {
         let now = d;
         let onejan = new Date(now.getFullYear(), 0, 1);
+        if (special)
+            return Math.ceil((((now.valueOf() - onejan.valueOf()) / 86400000) + onejan.getDay() - 1) / 7);
         return Math.ceil((((now.valueOf() - onejan.valueOf()) / 86400000) + onejan.getDay()) / 7);
-    }
-
-    selectStatistic(n) {
-        this.selectTab = n;
     }
 
     public get linearAxisZoomPan(): LinearAxis {

@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: "items", component: StatisticComponent },
     { path: "home", component: CalendarComponent },
     { path: "file", component: FileComponent },
-    { path: "options", component: OptionsComponent },
+    // { path: "options", component: OptionsComponent },
 ];
 
 @NgModule({

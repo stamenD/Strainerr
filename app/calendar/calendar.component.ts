@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import * as calendarModule from "nativescript-ui-calendar";
 import { CalendarTransitionMode } from "nativescript-ui-calendar";
-import { Color } from "color";
 import { CalendarStylesService } from '../services/calendar-service'
 import { ExercisesService } from "../services/exercises-service";
 // import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { InlineEventCellStyle, CalendarEvent, CalendarEventsViewMode, RadCalendar, CalendarMonthViewStyle } from "nativescript-ui-calendar"
 import { StorageService } from "../services/storage-service";
-import { clear } from "tns-core-modules/application-settings/application-settings";
+import * as dialogs from "ui/dialogs";
 
 
 @Component({
@@ -28,15 +27,13 @@ export class CalendarComponent implements OnInit {
     public bonusses;
     public indexVersion = 0;
     public _mode = CalendarTransitionMode.Combo
-    public selectedDate
+    public selectedDate = 0
     public selectedExercise = -1
-
     constructor(
         private _calendarService: CalendarStylesService,
         private _exercisesService: ExercisesService,
         private _storageService: StorageService) {
         this.selectedExercise = -1
-        this.selectedDate = new Date();
     }
 
     ngOnInit(): void {
@@ -62,12 +59,44 @@ export class CalendarComponent implements OnInit {
     }
 
     onDateSelected(args) {
-        // console.log("onDateSelected: " + args.date);
+        console.log("onDateSelected: " + args.date);
         this.selectedDate = args.date;
     }
+    onEvent(args) {
+        let exIndex
+        let bonusIndex = 0
+        let ex = args.eventData.title.split(" ")[0]
+        let bonus = args.eventData.title.split(" ")[1] + " " + args.eventData.title.split(" ")[2]
+        for (let i = 0; i < this.exercises.length; i++)
+            if (ex == this.exercises[i])
+                exIndex = i
+        for (let i = 0; i < this.bonusses.length; i++) {
+            if (bonus == this.bonusses[i])
+                bonusIndex = i
+        }
 
+        console.log("indexes: " + exIndex + " " + bonusIndex)
+
+        dialogs.confirm({
+            title: "Внимание",
+            message: "Сигурни ли сте, че искате да изтриете тренировката.",
+            okButtonText: "Да, искам да бъдат изтрита",
+            cancelButtonText: "Откажи",
+        }).then(result => {
+            if (result) {
+                this._storageService.deleteWorkout(exIndex, bonusIndex, args.eventData.startDate);
+                this.loadEvents()
+                dialogs.alert({
+                    message: "Успешно изтрихте тренировката",
+                    okButtonText: "ОК"
+                }).then(() => {
+                    console.log("Dialog closed!");
+                });
+            }
+        });
+    }
     onDateDeselected(args) {
-        // console.log("onDateDeselected: " + args.date);
+        console.log("onDateDeselected: " + args.date);
     }
 
     onNavigatedToDate(args) {
@@ -89,7 +118,7 @@ export class CalendarComponent implements OnInit {
     }
     setBonus() {
         this.indexVersion += 1;
-        this.indexVersion == 3 ? this.indexVersion = 0 : "";
+        this.indexVersion == this.bonusses.length ? this.indexVersion = 0 : "";
     }
     setExercise() {
         this._storageService.setWorkout(this.selectedExercise, this.indexVersion, this.selectedDate)
