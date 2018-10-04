@@ -1,2 +1,20 @@
 <actionBar></actionBar>
+<<<<<<< HEAD
 <Label text="Файлове система" textWrap="true"> </Label>
+=======
+<ScrollView sdkExampleTitle sdkToggleNavButton>
+    <StackLayout class="p-20">
+        <Label text="Extract" textWrap="true" class="my-label ">
+        </Label>
+        <TextField text="{{allInfo}}"> </TextField>
+        <Label text="" textWrap="true"> </Label>
+        <StackLayout class="hr-light m-10"></StackLayout>
+        <Label text="" textWrap="true"> </Label>
+        <Label text="Load" textWrap="true" class="my-label ">
+</Label>
+        <TextField [(ngModel)]="tvtext" text=""> </TextField>
+        <Button text="задай!" (tap)="load()" [isEnabled]='tvtext !=""' class='btn btn-primary btn-rounded-lg  btn-active'></Button>
+        <Button text="Изтрий всички данни!" (tap)="clear()" class='btn btn-primary btn-rounded-lg btn-active'></Button>
+    </StackLayout>
+</ScrollView>
+>>>>>>> features

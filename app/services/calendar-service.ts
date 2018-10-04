@@ -72,7 +72,11 @@ export class CalendarStylesService{
         monthViewStyle.weekendCellStyle = weekendCellStyle;
         
         var selectedCellStyle = new DayCellStyle();
+<<<<<<< HEAD
         // selectedCellStyle.eventTextColor = "Blue";
+=======
+        selectedCellStyle.eventTextColor = "#f5f5f5";
+>>>>>>> features
         // selectedCellStyle.eventFontName = "Times New Roman";
         // selectedCellStyle.eventFontStyle = "Bold";
         // selectedCellStyle.eventTextSize = 8;
@@ -270,11 +274,20 @@ export class CalendarStylesService{
 
     getInline(){
         var inlineEvents = new InlineEventCellStyle();
+<<<<<<< HEAD
         inlineEvents.cellBackgroundColor="#f39b90"; 
         inlineEvents.eventTextColor="DeepSkyBlue"; 
         inlineEvents.eventFontName="Avenir";
         inlineEvents.eventFontStyle="BoldItalic";
         inlineEvents.eventTextSize=14; 
+=======
+        inlineEvents.cellBackgroundColor="#f5f5f5"; 
+        // inlineEvents.eventTextColor="#f5f5f5"; 
+        // inlineEvents.eventFontName="Avenir";
+        inlineEvents.eventFontName = "Times New Roman";
+        inlineEvents.eventFontStyle="Bold";
+        inlineEvents.eventTextSize=16; 
+>>>>>>> features
 
        
         return inlineEvents;
@@ -338,7 +351,11 @@ export class CalendarStylesService{
         weekViewStyle.weekendCellStyle = weekendCellStyle;
         
         var selectedCellStyle = new DayCellStyle();
+<<<<<<< HEAD
         selectedCellStyle.eventTextColor = "Blue";
+=======
+        selectedCellStyle.eventTextColor = "#f5f5f5";
+>>>>>>> features
         selectedCellStyle.eventFontName = "Times New Roman";
         selectedCellStyle.eventFontStyle = "Bold";
         selectedCellStyle.eventTextSize = 8;

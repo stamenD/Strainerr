@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .action-image {
     width: 40;
     height: 40;
@@ -26,18 +27,31 @@ button {
     horizontal-align: left;
 }
 
+=======
+>>>>>>> features
 .sideStackLayout {
     background-color: gray;
 }
 
 .sideTitleStackLayout {
+<<<<<<< HEAD
     height: 56;
     text-align: center;
     vertical-align: center;
+=======
+    padding: 13;
+    font-size: 22;
+    font-weight: bold;
+    horizontal-align: center;
+>>>>>>> features
 }
 
 .sideLabel {
     padding: 10;
+<<<<<<< HEAD
+=======
+    font-size: 20;
+>>>>>>> features
 }
 
 .sideLightGrayLabel {

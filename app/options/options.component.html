@@ -1,3 +1,15 @@
 <actionBar></actionBar>
+<<<<<<< HEAD
 <Label text="Настройки" textWrap="true"> </Label>
 <Button text="Изтрий всички данни!" (tap)="clear()" class='btn btn-primary btn-rounded-lg btn-active'></Button>
+=======
+<StackLayout>
+    <Label text="Настройки" class="header" textWrap="true"> </Label>
+    <StackLayout class="input-field">
+        <TextField hint="Email" class="input"></TextField>
+        <Button text="Изпрати всички данни на емайл!" (tap)="send()" class='btn btn-primary btn-rounded-lg btn-active'></Button>
+        <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+    <Button text="Изтрий всички данни!" (tap)="clear()" class='btn btn-primary btn-rounded-lg btn-active'></Button>
+</StackLayout>
+>>>>>>> features

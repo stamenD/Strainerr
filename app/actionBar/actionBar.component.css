@@ -5,7 +5,11 @@
 }
 
 .action-label {
+<<<<<<< HEAD
     color: #3C5AFD;
+=======
+    color: rgb(0, 0, 0);
+>>>>>>> features
     font-size: 24;
     font-weight: bold;
     vertical-align: center;
@@ -15,6 +19,7 @@ button {
     font-size: 15;
     horizontal-align: center;
 }
+<<<<<<< HEAD
 
 .drawerContentText {
     font-size: 13;
@@ -43,3 +48,5 @@ button {
 .sideLightGrayLabel {
     background-color: lightgray;
 }
+=======
+>>>>>>> features
