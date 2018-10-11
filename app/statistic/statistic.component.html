@@ -1,25 +1,28 @@
 <actionBar></actionBar>
 <StackLayout class="page">
+    <Button [text]="currentState" (tap)="changeMeasure()" class='btn btn-primary btn-rounded-lg  btn-active'></Button>
+
     <TabView [(ngModel)]="tabSelectedIndex">
-        <StackLayout *tabItem="{title: 'Week'}">
+        <StackLayout *tabItem="{title: currentState}">
+
             <StackLayout class="p-10">
                 <StackLayout>
                     <ng-container *ngFor="let ex of exercises;let i = index">
-                        <Label class="fa my-label border" [text]='ex + ":  " + timesPerThisWeek["exercise"][i]'
+                        <Label class="fa my-label border" [text]='ex + ":  " + timesPerThisCurrentState["exercise"][i]'
                             textWrap="true">
                         </Label>
                     </ng-container>
-                    <Label class="fa my-label border" [text]='"Протеин:  " + timesPerThisWeek["bonus"]' textWrap="true">
+                    <Label class="fa my-label border" [text]='"Протеин:  " + timesPerThisCurrentState["bonus"]' textWrap="true">
                     </Label>
                 </StackLayout>
                 <StackLayout>
                     <RadPieChart allowAnimation="true">
                         <DonutSeries tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.9" expandRadius="0.4"
-                            outerRadiusFactor="0.7" innerRadiusFactor="0.4" [items]='sourcePie' valueProperty="amount"
+                            outerRadiusFactor="0.7" innerRadiusFactor="0.4" [items]='sourcePieThisCurrentState' valueProperty="amount"
                             legendLabel="name"></DonutSeries>
 
-                        <RadLegendView tkPieLegend titleSize="5" position="Right" title="Exercises" offsetOrigin="TopRight" width="110"
-                            enableSelection="true"></RadLegendView>
+                        <RadLegendView tkPieLegend titleSize="5" position="Right" title="Exercises" offsetOrigin="TopRight"
+                            width="110" enableSelection="true"></RadLegendView>
                     </RadPieChart>
                 </StackLayout>
             </StackLayout>
@@ -30,10 +33,10 @@
                     <StackLayout row="0" rowSpan="7" col="0">
                         <RadCartesianChart *ngIf="selectedExercise!=-1" tkExampleTitle tkToggleNavButton>
                             <DateTimeContinuousAxis allowPan="true" allowZoom="true" tkCartesianHorizontalAxis
-                                [minimum]="minWeek" [maximum]="maxWeek" majorStep="week" dateFormat="MMM-dd"
+                                [minimum]="minWeek" [maximum]="maxWeek" [majorStep]="currentState" dateFormat="MMM-dd"
                                 labelFitMode="Rotate" labelRotationAngle="1.2"></DateTimeContinuousAxis>
                             <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                            <BarSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="date"
+                            <BarSeries tkCartesianSeries [items]="categoricalSourceCurrentState" categoryProperty="date"
                                 [valueProperty]="selectedExercise+1"></BarSeries>
                         </RadCartesianChart>
                     </StackLayout>
@@ -54,10 +57,10 @@
                     <StackLayout *ngFor="let ex of exercises;let i = index" [row]="i%2" [col]="i/2">
                         <Label class="fa font-weight-bold h3" [text]='ex' textWrap="true">
                         </Label>
-                        <Label class="fa font-weight-bold my-label2" [text]='"Брой: "+ mostTimesPerWeek["exercise"][i]["count"]'
+                        <Label class="fa font-weight-bold my-label2" [text]='"Брой: "+ mostTimesPerCurrentState["exercise"][i]["count"]'
                             textWrap="true">
                         </Label>
-                        <Label class="fa font-weight-bold my-label2" [text]='mostTimesPerWeek["exercise"][i]["date"]'
+                        <Label class="fa font-weight-bold my-label2" [text]='mostTimesPerCurrentState["exercise"][i]["date"]'
                             textWrap="true"> </Label>
                         <Label text="" textWrap="true"> </Label>
                     </StackLayout>
@@ -68,12 +71,13 @@
                                 outerRadiusFactor="0.7" innerRadiusFactor="0.4" [items]='allWorkouts' valueProperty="amount"
                                 legendLabel="name"></DonutSeries>
 
-                            <RadLegendView tkPieLegend position="Right" title="Exercises" titleSize="5" offsetOrigin="TopRight" width="110"
-                                enableSelection="true"></RadLegendView>
+                            <RadLegendView tkPieLegend position="Right" title="Exercises" titleSize="5" offsetOrigin="TopRight"
+                                width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
                     </StackLayout>
                 </GridLayout>
             </StackLayout>
         </StackLayout>
+
     </TabView>
 </StackLayout>
