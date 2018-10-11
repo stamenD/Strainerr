@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+<<<<<<< HEAD
+=======
 import { DropDownService } from "~/services/dropdown-service";
+>>>>>>> features
 @Component({
     selector: "actionBar",
     moduleId: module.id,
@@ -8,6 +11,12 @@ import { DropDownService } from "~/services/dropdown-service";
 })
 export class ActionBarComponent implements OnInit {
 
+<<<<<<< HEAD
+    constructor() { }
+
+    ngOnInit(): void {
+       
+=======
     constructor(private dropDownService:DropDownService) { }
 
     ngOnInit(): void {
@@ -18,5 +27,6 @@ export class ActionBarComponent implements OnInit {
         // This code will be called only in Android.
         this.dropDownService.tapButton()
         console.log("Navigation button tapped!");
+>>>>>>> features
     }
 }

@@ -5,7 +5,11 @@
 }
 
 .action-label {
+<<<<<<< HEAD
+    color: #3C5AFD;
+=======
     color: rgb(0, 0, 0);
+>>>>>>> features
     font-size: 24;
     font-weight: bold;
     vertical-align: center;
@@ -15,3 +19,34 @@ button {
     font-size: 15;
     horizontal-align: center;
 }
+<<<<<<< HEAD
+
+.drawerContentText {
+    font-size: 13;
+    padding: 10;
+}
+
+.drawerContentButton {
+    margin: 10;
+    horizontal-align: left;
+}
+
+.sideStackLayout {
+    background-color: gray;
+}
+
+.sideTitleStackLayout {
+    height: 56;
+    text-align: center;
+    vertical-align: center;
+}
+
+.sideLabel {
+    padding: 10;
+}
+
+.sideLightGrayLabel {
+    background-color: lightgray;
+}
+=======
+>>>>>>> features

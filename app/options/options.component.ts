@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+import { Component,OnInit} from "@angular/core";
+import { StorageService } from "~/services/storage-service";
+import * as dialogs from "ui/dialogs";
+
+@Component({
+    selector: "optionsComponent",
+    templateUrl: "options.component.html",
+    // styleUrls: ['./options.component.css']
+})
+
+export class OptionsComponent implements  OnInit {
+
+    constructor(private storage : StorageService) { }
+
+=======
 import { Component, OnInit } from "@angular/core";
 import { StorageService } from "../services/storage-service";
 import * as dialogs from "ui/dialogs";
@@ -20,19 +36,28 @@ export class OptionsComponent implements OnInit {
             cc: ["stamendragoew@gmail.com"]
         }
     }
+>>>>>>> features
 
     ngOnInit() {
 
     }
 
+<<<<<<< HEAD
+    clear(){
+=======
     clear() {
+>>>>>>> features
         dialogs.confirm({
             title: "Внимание",
             message: "При потвърждаване ще бъдат изтрите всички записи за тренировките.",
             okButtonText: "Да, искам да бъдат изтрити",
             cancelButtonText: "Откажи",
         }).then(result => {
+<<<<<<< HEAD
+            if(result){
+=======
             if (result) {
+>>>>>>> features
                 this.storage.deleteAllWorkouts();
                 dialogs.alert({
                     message: "Успешно изтрихте данните",
@@ -43,6 +68,8 @@ export class OptionsComponent implements OnInit {
             }
         });
     }
+<<<<<<< HEAD
+=======
     send() {
         console.log(3)
         email.available().then((available) => {
@@ -67,4 +94,5 @@ export class OptionsComponent implements OnInit {
             })
         })
     }
+>>>>>>> features
 }

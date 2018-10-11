@@ -1,12 +1,22 @@
 import { Component, OnInit } from "@angular/core";
 import * as calendarModule from "nativescript-ui-calendar";
 import { CalendarTransitionMode } from "nativescript-ui-calendar";
+<<<<<<< HEAD
+import { Color } from "color";
+import { CalendarStylesService } from '../services/calendar-service'
+import { ExercisesService } from "~/services/exercises-service";
+// import { SelectedIndexChangedEventData } from "nativescript-drop-down";
+import { InlineEventCellStyle, CalendarEvent, CalendarEventsViewMode, RadCalendar, CalendarMonthViewStyle } from "nativescript-ui-calendar"
+import { StorageService } from "~/services/storage-service";
+import { clear } from "tns-core-modules/application-settings/application-settings";
+=======
 import { CalendarStylesService } from '../services/calendar-service'
 import { ExercisesService } from "../services/exercises-service";
 // import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { InlineEventCellStyle, CalendarEvent, CalendarEventsViewMode, RadCalendar, CalendarMonthViewStyle } from "nativescript-ui-calendar"
 import { StorageService } from "../services/storage-service";
 import * as dialogs from "ui/dialogs";
+>>>>>>> features
 
 
 @Component({
@@ -27,13 +37,23 @@ export class CalendarComponent implements OnInit {
     public bonusses;
     public indexVersion = 0;
     public _mode = CalendarTransitionMode.Combo
+<<<<<<< HEAD
+    public selectedDate
+    public selectedExercise
+
+=======
     public selectedDate = 0
     public selectedExercise = -1
+>>>>>>> features
     constructor(
         private _calendarService: CalendarStylesService,
         private _exercisesService: ExercisesService,
         private _storageService: StorageService) {
         this.selectedExercise = -1
+<<<<<<< HEAD
+        this.selectedDate = new Date();
+=======
+>>>>>>> features
     }
 
     ngOnInit(): void {
@@ -62,6 +82,9 @@ export class CalendarComponent implements OnInit {
         console.log("onDateSelected: " + args.date);
         this.selectedDate = args.date;
     }
+<<<<<<< HEAD
+
+=======
     onEvent(args) {
         let exIndex
         let bonusIndex = 0
@@ -104,11 +127,23 @@ export class CalendarComponent implements OnInit {
             }
         });
     }
+>>>>>>> features
     onDateDeselected(args) {
         console.log("onDateDeselected: " + args.date);
     }
 
     onNavigatedToDate(args) {
+<<<<<<< HEAD
+        console.log("onNavigatedToDate: " + args.date);
+    }
+
+    onNavigatingToDateStarted(args) {
+        console.log("onNavigatingToDateStarted: " + args.date);
+    }
+
+    onViewModeChanged(args) {
+        console.log("onViewModeChanged: " + args.newValue);
+=======
         // console.log("onNavigatedToDate: " + args.date);
     }
 
@@ -118,6 +153,7 @@ export class CalendarComponent implements OnInit {
 
     onViewModeChanged(args) {
         // console.log("onViewModeChanged: " + args.newValue);
+>>>>>>> features
     }
     onTap(args) {
         if (this.selectedExercise == +args)
@@ -127,12 +163,27 @@ export class CalendarComponent implements OnInit {
     }
     setBonus() {
         this.indexVersion += 1;
+<<<<<<< HEAD
+        this.indexVersion == 3 ? this.indexVersion = 0 : "";
+=======
         this.indexVersion == this.bonusses.length ? this.indexVersion = 0 : "";
+>>>>>>> features
     }
     setExercise() {
         this._storageService.setWorkout(this.selectedExercise, this.indexVersion, this.selectedDate)
         this.loadEvents()
     }
+<<<<<<< HEAD
+    loadEvents(){
+        let events = this._storageService.getAllWorkouts();
+        console.log("---------------------------------")
+        console.log(events)
+
+        this.calendarEvents = [];
+        for (let i = 0; i < events.length; i++) {
+
+            let title = this.exercises[events[i]["exercise"]] + " " + this.bonusses[events[i]["bonus"]];
+=======
     loadEvents() {
         let events = this._storageService.getAllWorkouts();
         // console.log("---------------------------------")
@@ -145,6 +196,7 @@ export class CalendarComponent implements OnInit {
                 title = this.bonusses[events[i]["bonus"]];
             else
                 title = this.exercises[events[i]["exercise"]] + " " + this.bonusses[events[i]["bonus"]];
+>>>>>>> features
             let date = new Date(events[i]["date"]);
             let event = new calendarModule.CalendarEvent(title, date, date, true);
 

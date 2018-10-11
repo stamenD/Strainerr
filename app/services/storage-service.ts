@@ -4,6 +4,22 @@ import * as calendarModule from "nativescript-ui-calendar"
 import { getBoolean, setBoolean, getNumber, setNumber, getString, setString, hasKey, remove, clear } from "application-settings";
 @Injectable()
 export class StorageService {
+<<<<<<< HEAD
+
+    setWorkout(title,bonus,date) {
+        let exsNumber = getNumber("numberExs", 0)
+      
+        let json = { "exercise": title, "bonus": bonus, "date": date };
+        setString(exsNumber.toString(), JSON.stringify(json)); 
+        
+        setNumber("numberExs", exsNumber + 1)
+    }
+
+    getAllWorkouts(): string[]{
+        let calendarEvents = [];
+        let exsNumber = getNumber("numberExs", 0)
+        for (let i = 0; i < exsNumber ; i++) {
+=======
     '{"exercise":0,"bonus":2,"date":"2018-09-26T00:00:00.000Z"} {"exercise":0,"bonus":2,"date":"2018-09-26T00:00:00.000Z"} {"exercise":1,"bonus":0,"date":"2018-10-01T00:00:00.000Z"} {"exercise":-1,"bonus":1,"date":"2018-09-30T00:00:00.000Z"} {"exercise":1,"bonus":0,"date":"2018-10-07T00:00:00.000Z"} {"exercise":1,"bonus":0,"date":"2018-10-07T00:00:00.000Z"}'
 
     setWorkout(title, bonus, date) {
@@ -27,11 +43,19 @@ export class StorageService {
         let calendarEvents = [];
         let exsNumber = getNumber("numberExs", 0)
         for (let i = 0; i < exsNumber; i++) {
+>>>>>>> features
             let eventInfo = JSON.parse(getString(i.toString()));
             calendarEvents.push(eventInfo);
         }
         return calendarEvents;
     }
+<<<<<<< HEAD
+
+    deleteAllWorkouts(){
+        clear();
+    }
+
+=======
     getAllWorkoutsString(): string {
         let calendarEvents = "";
         let exsNumber = getNumber("numberExs", 0)
@@ -64,4 +88,5 @@ export class StorageService {
 
         }
     }
+>>>>>>> features
 }

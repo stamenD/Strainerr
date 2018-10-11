@@ -1,4 +1,14 @@
 <actionBar></actionBar>
+<<<<<<< HEAD
+
+<RadCartesianChart tkExampleTitle tkToggleNavButton>
+    <DateTimeContinuousAxis allowPan="true" allowZoom="true" tkCartesianHorizontalAxis minimum="01/09/2018" maximum="30/11/2018"
+        majorStep="week" dateFormat="MMM-dd" labelFitMode="Rotate" labelRotationAngle="1.2"></DateTimeContinuousAxis>
+    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+
+    <BarSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="date" valueProperty="exercise"></BarSeries>
+</RadCartesianChart>
+=======
 <StackLayout class="page">
     <Button [text]="currentState" (tap)="changeMeasure()" class='btn btn-primary btn-rounded-lg  btn-active'></Button>
 
@@ -81,3 +91,4 @@
 
     </TabView>
 </StackLayout>
+>>>>>>> features

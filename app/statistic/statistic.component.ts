@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
 import { LinearAxis } from "nativescript-ui-chart";
 import { StorageService } from '../services/storage-service';
 import { ExercisesService } from '~/services/exercises-service';
 import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
+
 @Component({
     selector: "statistic",
     moduleId: module.id,
@@ -10,6 +12,7 @@ import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
     styleUrls: ['./statistic.component.css']
 })
 export class StatisticComponent implements OnInit {
+
     public allWorkouts = [];
 
     public timesPerMonth = {}; //
@@ -214,6 +217,7 @@ export class StatisticComponent implements OnInit {
         }
         // console.log(">>. ", this.categoricalSourceWeek)
 
+
         this.categoricalSourceWeek.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
 
         j = 0
@@ -240,6 +244,7 @@ export class StatisticComponent implements OnInit {
         this.categoricalSourceMonth.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
 
 
+
         this._linearAxisZoom = new LinearAxis();
         this._linearAxisZoom.horizontalLocation = "Left";
         this._linearAxisZoom.allowZoom = true;
@@ -257,6 +262,7 @@ export class StatisticComponent implements OnInit {
 
     }
 
+
     onTap(args) {
         if (this.selectedExercise == +args)
             this.selectedExercise = -1
@@ -271,7 +277,6 @@ export class StatisticComponent implements OnInit {
             return Math.ceil((((now.valueOf() - onejan.valueOf()) / 86400000) + onejan.getDay() - 1) / 7);
         return Math.ceil((((now.valueOf() - onejan.valueOf()) / 86400000) + onejan.getDay()) / 7);
     }
-
     public get linearAxisZoomPan(): LinearAxis {
         return this._linearAxisZoomPan;
     }
