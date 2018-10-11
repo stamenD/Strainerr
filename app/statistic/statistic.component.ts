@@ -41,7 +41,7 @@ export class StatisticComponent implements OnInit {
 
         this.exercises = this.exercisesService.getExercises();
         this.workouts = this.storageService.getAllWorkouts();
-        this.thisWeek = this.getWeekNumber(new Date(),true)
+        this.thisWeek = this.getWeekNumber(new Date(), true)
         this.timesPerThisWeek["exercise"] = {}
         this.mostTimesPerWeek["exercise"] = {}
         for (let i = 0; i < this.exercises.length; i++) {
@@ -60,7 +60,7 @@ export class StatisticComponent implements OnInit {
         this.mostTimesPerWeek["bonus"] = 0
         for (let i = 0; i < this.workouts.length; i++) {
 
-            let n = this.getWeekNumber(new Date(this.workouts[i]["date"]),false)
+            let n = this.getWeekNumber(new Date(this.workouts[i]["date"]), false)
             let d = (1 + (n - 1) * 7); // 1st of January + 7 days for each week
             let y = new Date(new Date(this.workouts[i]["date"]).getFullYear(), 0, d).toDateString();
             if (this.workouts[i]["exercise"] != -1) {
@@ -77,7 +77,9 @@ export class StatisticComponent implements OnInit {
                 }
             }
 
-            if (n == this.thisWeek) {
+            let yearWorkout = new Date(this.workouts[i]["date"]).getFullYear();
+            let thisYear = new Date().getFullYear();
+            if (n == this.thisWeek && yearWorkout == thisYear) {
                 if (this.workouts[i]["exercise"] != -1)
                     this.timesPerThisWeek["exercise"][this.workouts[i]["exercise"]] += 1;
                 this.timesPerThisWeek["bonus"] += this.workouts[i]["bonus"]
