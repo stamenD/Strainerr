@@ -88,8 +88,17 @@ export class CalendarComponent implements OnInit {
     onEvent(args) {
         let exIndex
         let bonusIndex = 0
-        let ex = args.eventData.title.split(" ")[0]
-        let bonus = args.eventData.title.split(" ")[1] + " " + args.eventData.title.split(" ")[2]
+        let ex
+        let bonus
+        console.log(">>: " + args.eventData.title)
+        if (args.eventData.title.split(" ").length == 3) {
+            ex = args.eventData.title.split(" ")[0]
+            bonus = args.eventData.title.split(" ")[1] + " " + args.eventData.title.split(" ")[2]
+        }
+        else{
+            ex = null
+            bonus = args.eventData.title.split(" ")[0] + " " + args.eventData.title.split(" ")[1]
+        }
         for (let i = 0; i < this.exercises.length; i++)
             if (ex == this.exercises[i])
                 exIndex = i
