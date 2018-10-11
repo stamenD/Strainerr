@@ -77,7 +77,7 @@ export class StorageService {
             console.log(eventInfo["bonus"], " ", bonus)
             console.log(new Date(eventInfo["date"]))
             console.log(new Date(date))
-            if (eventInfo["exercise"] == ex && eventInfo["bonus"] == bonus && new Date(eventInfo["date"]).getTime() == new Date(date).getTime()) {
+            if ((!ex  || eventInfo["exercise"] == ex) && eventInfo["bonus"] == bonus && new Date(eventInfo["date"]).getTime() == new Date(date).getTime()) {
                 remove(i.toString())
                 console.log(exsNumber - 1)
                 console.log(getString((exsNumber - 1).toString()))
