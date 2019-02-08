@@ -8,4 +8,4 @@ I use  UI Components:
  * Calendar
  * SideDrawer
  
-![View](images/view.png?raw=true)
+![View](images/view.png)
